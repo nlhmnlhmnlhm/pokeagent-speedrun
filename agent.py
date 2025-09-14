@@ -2051,11 +2051,7 @@ def simple_mode_processing_multiprocess(vlm, game_state, args):
             simple_mode_processing_multiprocess.recent_actions = []
         
         # Create simple prompt with just frame and comprehensive state
-        prompt = f"""You are an AI agent playing Pokémon Emerald on a Game Boy Advance emulator. The goal is to navigate from roads to cities.
-
-HINT:
-- If the NPCs are battling against you, you gained points because that mean you haven't explored the area.
-- If you are stuck, try moving in a different direction or backtracking.
+        prompt = f"""You are an AI agent playing Pokémon Emerald on a Game Boy Advance emulator, starting on Route 102 with Treecko. The goal is to advance towards the next city, Petalburg City.
 
 CURRENT APPROXIMATIVE GAME STATE:
 {formatted_state}
