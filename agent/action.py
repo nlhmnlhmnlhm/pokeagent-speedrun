@@ -97,7 +97,7 @@ def action_step(memory_context, current_plan, latest_observation, frame, state_d
     - Use coordinates to track progress toward objectives
     
     MENU/DIALOGUE STRATEGY:
-    - If in dialogue: A to advance text, B to cancel/skip if possible
+    - If in dialogue: A to advance text
     - If in menu: Navigate with UP/DOWN/LEFT/RIGHT, A to select, B to cancel/back out
     - If stuck in menu/interface: B repeatedly to exit to overworld
     - In Pokemon Center: A to talk to Nurse Joy, A to confirm healing

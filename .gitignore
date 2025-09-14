@@ -6,7 +6,7 @@
 *.gba
 llm_log_*
 CLAUDE.md
-
+pokegent_recording_20250914_185150.mp4
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

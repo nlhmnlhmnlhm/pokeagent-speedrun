@@ -93,4 +93,4 @@ def planning_step(memory_context, current_plan, slow_thinking_needed, state_data
         logger.info("[PLANNING] New plan created")
     
     logger.info(f"[PLANNING] Final plan: {current_plan[:300]}..." if len(current_plan) > 300 else f"[PLANNING] Final plan: {current_plan}")
-    return current_plan 
+    return "" # current_plan 
