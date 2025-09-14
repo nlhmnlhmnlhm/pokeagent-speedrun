@@ -328,7 +328,7 @@ CURRENT GAME STATE:
 ACTION HISTORY (last 20 actions):
 {', '.join(self.recent_actions[-20:]) if self.recent_actions else 'None'}
 
-Available actions: A, B, START, SELECT, UP, DOWN, LEFT, RIGHT
+Available actions: A, B, START, SELECT, UP, DOWN, LEFT, RIGHT.
 
 Respond with just the button name (e.g., 'A' or 'RIGHT'). Be decisive and avoid getting stuck."""
             
@@ -1233,10 +1233,11 @@ def display_map():
         
         # Use unified formatter for raw map display
         if raw_map_data:
-            facing = player_data.get('facing', 'South')
+            # facing = player_data.get('facing')
             npcs = state.get('map', {}).get('object_events', [])
             player_coords = state.get('map', {}).get('player_coords')
-            formatted_map = format_map_for_display(raw_map_data, facing, "15x15 Map", npcs, player_coords)
+            # formatted_map = format_map_for_display(raw_map_data, facing, "15x15 Map", npcs, player_coords)
+            formatted_map = format_map_for_display(raw_map_data, None, "15x15 Map", npcs, player_coords)
             print(formatted_map)
         else:
             print("No raw map data available")
@@ -1958,8 +1959,8 @@ def run_multiprocess_client_headless(server_port=8000, args=None):
         try:
             # Initialize agent modules like single process mode
             agent_modules = {
-                'perception': True,  # We'll use the functions directly
-                'planning': True,
+                'perception': False,  # We'll use the functions directly
+                'planning': False,
                 'memory': True,
                 'action': True
             }
@@ -2050,17 +2051,21 @@ def simple_mode_processing_multiprocess(vlm, game_state, args):
             simple_mode_processing_multiprocess.recent_actions = []
         
         # Create simple prompt with just frame and comprehensive state
-        prompt = f"""You are playing Pokemon Emerald. Based on the current game frame and state information, choose the best button action.
+        prompt = f"""You are an AI agent playing Pokémon Emerald on a Game Boy Advance emulator. The goal is to navigate from roads to cities.
 
-CURRENT GAME STATE:
+HINT:
+- If the NPCs are battling against you, you gained points because that mean you haven't explored the area.
+- If you are stuck, try moving in a different direction or backtracking.
+
+CURRENT APPROXIMATIVE GAME STATE:
 {formatted_state}
 
 ACTION HISTORY (last 20 actions):
 {', '.join(simple_mode_processing_multiprocess.recent_actions[-20:]) if simple_mode_processing_multiprocess.recent_actions else 'None'}
 
-Available actions: A, B, START, SELECT, UP, DOWN, LEFT, RIGHT
+Available actions: A, B, START, SELECT, UP, DOWN, RIGHT, LEFT
 
-Respond with just the button name (e.g., 'A' or 'RIGHT'). Be decisive and avoid getting stuck."""
+Respond with just the button name (e.g., 'LEFT'). Be decisive and avoid getting stuck."""
         
         # Query VLM for action
         response = vlm.get_query(frame, prompt, "simple_multiprocess")
